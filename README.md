@@ -1,10 +1,13 @@
 # re-frisk remote library
 
-[re-frisk](https://github.com/flexsurfer/re-frisk) remote library for debugging re-frame applications (react native, electron) using leiningen re-frisk [plugin](https://github.com/flexsurfer/lein-re-frisk)
+[re-frisk](https://github.com/flexsurfer/re-frisk) remote library for debugging re-frame applications (react native, electron, web) using leiningen re-frisk [plugin](https://github.com/flexsurfer/lein-re-frisk)
 
-<img src="2016-01-01-starting-clojure-today.jpg" width="100">
+[<img src="2016-01-01-starting-clojure-today.jpg" width="100">](https://github.com/flexsurfer/re-frisk)
 
 ## Usage
+
+[![Clojars](https://img.shields.io/clojars/v/re-frisk-remote.svg)](https://clojars.org/re-frisk-remote)
+
 
 Add `[re-frisk-remote "0.4.0"]` to the dev `:dependencies` in your project.clj
                                 
