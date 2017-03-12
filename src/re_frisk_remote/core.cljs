@@ -1,5 +1,6 @@
 (ns re-frisk-remote.core
   (:require [taoensso.sente :as sente]
+            [taoensso.timbre :as timbre]
             [reagent.core :as reagent]
             [re-frame.core :refer [subscribe] :as re-frame]
             [taoensso.sente.packers.transit :as sente-transit]
@@ -35,5 +36,6 @@
   (re-frame/add-post-event-callback post-event-callback))
 
 (defn enable-re-frisk-remote! [& [{:keys [host] :as opts}]]
+  (timbre/merge-config! {:ns-blacklist  ["taoensso.sente" "taoensso.sente.*"]})
   (start-socket (or host "localhost:4567"))
   (js/setTimeout init 2000))

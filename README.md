@@ -9,7 +9,7 @@
 [![Clojars](https://img.shields.io/clojars/v/re-frisk-remote.svg)](https://clojars.org/re-frisk-remote)
 
 
-Add `[re-frisk-remote "0.4.0"]` to the dev `:dependencies` in your project.clj
+Add `[re-frisk-remote "0.4.1"]` to the dev `:dependencies` in your project.clj
                                 
 run re-frisk after document will be loaded and before any rendering calls, using `enable-re-frisk-remote!` function on the localhost and default port (4567)
 
