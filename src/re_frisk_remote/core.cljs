@@ -1,5 +1,6 @@
 (ns re-frisk-remote.core
-  (:require [taoensso.sente :as sente]
+  (:require [clojure.walk :as w]
+            [taoensso.sente :as sente]
             [taoensso.timbre :as timbre]
             [reagent.core :as reagent]
             [re-frame.core :refer [subscribe] :as re-frame]
@@ -10,10 +11,16 @@
 (defonce chsk-send! (atom {}))
 
 (defn post-event-callback [value]
-  (@chsk-send! [:refrisk/events value]))
+      (@chsk-send! [:refrisk/events value]))
 
 (defn send-app-db []
-  (@chsk-send! [:refrisk/app-db @(subscribe [::db])]))
+      (let [val (w/prewalk
+                  (fn [v]
+                      (if (map? v)
+                        (into {} v)
+                        v))
+                  @(subscribe [::db]))]
+           (@chsk-send! [:refrisk/app-db val])))
 
 (defn start-socket [host]
   (let [{:keys [send-fn]}
