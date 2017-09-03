@@ -3,7 +3,7 @@
   <groupId>re-frisk-remote</groupId>
   <artifactId>re-frisk-remote</artifactId>
   <packaging>jar</packaging>
-  <version>0.4.0</version>
+  <version>0.5.0</version>
   <name>re-frisk-remote</name>
   <description>re-frisk remote library for use with leiningen re-frisk plugin</description>
   <url>https://github.com/flexsurfer/re-frisk</url>
@@ -16,7 +16,7 @@
   <scm>
     <connection>scm:git:git://github.com/flexsurfer/re-frisk-remote.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/flexsurfer/re-frisk-remote.git</developerConnection>
-    <tag>HEAD
+    <tag>88ab931ed0c8d1ae6c5b92d2968f3b0bf77c8809
 </tag>
     <url>https://github.com/flexsurfer/re-frisk-remote</url>
   </scm>
@@ -66,12 +66,17 @@
     <dependency>
       <groupId>reagent</groupId>
       <artifactId>reagent</artifactId>
-      <version>0.6.0</version>
+      <version>0.7.0</version>
     </dependency>
     <dependency>
       <groupId>re-frame</groupId>
       <artifactId>re-frame</artifactId>
-      <version>0.8.0</version>
+      <version>0.10.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.taoensso</groupId>
+      <artifactId>timbre</artifactId>
+      <version>4.7.4</version>
     </dependency>
     <dependency>
       <groupId>com.taoensso</groupId>

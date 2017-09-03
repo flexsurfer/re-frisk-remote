@@ -9,24 +9,19 @@
 [![Clojars](https://img.shields.io/clojars/v/re-frisk-remote.svg)](https://clojars.org/re-frisk-remote)
 
 
-Add `[re-frisk-remote "0.4.1"]` to the dev `:dependencies` in your project.clj
+Add `[re-frisk-remote "0.5.0"]` to the dev `:dependencies` in your project.clj
                                 
-run re-frisk after document will be loaded and before any rendering calls, using `enable-re-frisk-remote!` function on the localhost and default port (4567)
+run re-frisk using `enable-re-frisk-remote!` function on the localhost and default port (4567)
 
-```clojure
+```cljs
 (:require [re-frisk-remote.core :refer [enable-re-frisk-remote!]])
 
-(defn ^:export run
- []
- (dispatch-sync [:initialize])
  (enable-re-frisk-remote!)
- (reagent/render [simple-example]
-                 (js/document.getElementById "app")))
 ```
 
-Select a different host and port by supplying the host and port number:
+Or select a different host and port by supplying the host and port number:
 
-```clojure
+```cljs
 (enable-re-frisk-remote! {:host "192.168.1.1:8095"})
 ```
 
