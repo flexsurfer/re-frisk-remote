@@ -39,6 +39,7 @@
           "/chsk"
           {:type   :auto
            :host   host
+           :protocol :http
            :packer (sente-transit/get-transit-packer
                      :json
                      {:handlerForForeign (fn [x h] (transit/write-handler (fn [o] "ForeignType")
