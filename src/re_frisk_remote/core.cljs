@@ -37,13 +37,14 @@
   (let [{:keys [send-fn]}
         (sente/make-channel-socket-client!
           "/chsk"
-          {:type   :auto
-           :host   host
-           :packer (sente-transit/get-transit-packer
-                     :json
-                     {:handlerForForeign (fn [x h] (transit/write-handler (fn [o] "ForeignType")
-                                                                          (fn [o] "")))}
-                     {})})]
+          {:type     :auto
+           :host     host
+           :protocol :http
+           :packer   (sente-transit/get-transit-packer
+                       :json
+                       {:handlerForForeign (fn [x h] (transit/write-handler (fn [o] "ForeignType")
+                                                                            (fn [o] "")))}
+                       {})})]
     (reset! chsk-send!* send-fn)))
 
 (defn init []
@@ -55,7 +56,7 @@
   (when @on-init* (@on-init*)))
 
 (defn enable-re-frisk-remote! [& [{:keys [host pre-send on-init] :as opts}]]
-  (timbre/merge-config! {:ns-blacklist  ["taoensso.sente" "taoensso.sente.*"]})
+  (timbre/merge-config! {:ns-blacklist ["taoensso.sente" "taoensso.sente.*"]})
   (reset! pre-send* pre-send)
   (reset! on-init* on-init)
   (start-socket (or host "localhost:4567"))
