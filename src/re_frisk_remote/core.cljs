@@ -12,9 +12,16 @@
 (defonce on-init* (atom nil))
 (defonce pre-send* (atom nil))
 (defonce id-handler-timer* (atom nil))
+(defonce evnt-time* (atom nil))
+
+(defn pre-event-callback [value]
+  (reset! evnt-time* (js/Date.now))
+  (@chsk-send!* [:refrisk/pre-events value]))
 
 (defn post-event-callback [value]
-  (@chsk-send!* [:refrisk/events value]))
+  (@chsk-send!* [:refrisk/events (if @evnt-time*
+                                   (- (js/Date.now) @evnt-time*)
+                                   value)]))
 
 (defn re-frame-sub [& rest]
   ;; TODO send diff
