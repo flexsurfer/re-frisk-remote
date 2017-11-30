@@ -4,24 +4,32 @@
             [reagent.core :as reagent]
             [re-frame.subs :refer [query->reaction]]
             [re-frame.core :refer [subscribe] :as re-frame]
+            [re-frisk-remote.diff :as diff]
             [taoensso.sente.packers.transit :as sente-transit]
             [cognitect.transit :as transit])
   (:require-macros [reagent.ratom :refer [reaction]]))
 
+(defonce app-db-prev-event (atom {}))
 (defonce chsk-send!* (atom {}))
 (defonce on-init* (atom nil))
 (defonce pre-send* (atom nil))
 (defonce id-handler-timer* (atom nil))
 (defonce evnt-time* (atom nil))
 
+(defn- app-db-diff []
+  (let [app-db @(subscribe [::db])
+        app-diff (diff/diff @app-db-prev-event app-db)]
+    (reset! app-db-prev-event app-db)
+    {:app-db-diff app-diff}))
+
 (defn pre-event-callback [value]
   (reset! evnt-time* (js/Date.now))
-  (@chsk-send!* [:refrisk/pre-events value]))
+  (@chsk-send!* [:refrisk/pre-events (conj value (app-db-diff))]))
 
 (defn post-event-callback [value]
   (@chsk-send!* [:refrisk/events (if @evnt-time*
                                    (- (js/Date.now) @evnt-time*)
-                                   value)]))
+                                   (conj value (app-db-diff)))]))
 
 (defn re-frame-sub [& rest]
   ;; TODO send diff
