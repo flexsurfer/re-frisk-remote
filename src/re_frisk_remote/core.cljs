@@ -4,7 +4,7 @@
             [reagent.core :as reagent]
             [re-frame.subs :refer [query->reaction]]
             [re-frame.core :refer [subscribe] :as re-frame]
-            [re-frisk-remote.diff :as diff]
+            [re-frisk.diff :as diff]
             [taoensso.sente.packers.transit :as sente-transit]
             [cognitect.transit :as transit])
   (:require-macros [reagent.ratom :refer [reaction]]))

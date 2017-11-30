@@ -8,4 +8,5 @@
                  [re-frame "0.10.1"]
                  [com.taoensso/timbre "4.7.4"]
                  [com.taoensso/sente "1.11.0"]
-                 [com.cognitect/transit-cljs "0.8.239"]])
+                 [com.cognitect/transit-cljs "0.8.239"]
+                 [re-frisk "0.5.3"]])
