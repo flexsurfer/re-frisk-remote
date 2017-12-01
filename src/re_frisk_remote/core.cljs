@@ -20,16 +20,17 @@
   (let [app-db @(subscribe [::db])
         app-diff (diff/diff @app-db-prev-event app-db)]
     (reset! app-db-prev-event app-db)
-    {:app-db-diff app-diff}))
+    app-diff))
 
 (defn pre-event-callback [value]
   (reset! evnt-time* (js/Date.now))
-  (@chsk-send!* [:refrisk/pre-events (conj value (app-db-diff))]))
+  (@chsk-send!* [:refrisk/pre-events value]))
 
 (defn post-event-callback [value]
-  (@chsk-send!* [:refrisk/events (if @evnt-time*
-                                   (- (js/Date.now) @evnt-time*)
-                                   (conj value (app-db-diff)))]))
+  (@chsk-send!* [:refrisk/events (conj {:app-db-diff (app-db-diff)}
+                                       (if @evnt-time*
+                                         {:time (- (js/Date.now) @evnt-time*)}
+                                         {:event value}))]))
 
 (defn re-frame-sub [& rest]
   ;; TODO send diff
