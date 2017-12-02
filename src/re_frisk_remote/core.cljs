@@ -71,8 +71,8 @@
     (re-frame.core/register-sub ::db (fn [db _] (reaction @db))))
   (reagent/track! send-app-db)
   (re-frame/add-post-event-callback post-event-callback)
-  (when @on-init* (@on-init*))
-  (set! initialized true))
+  (set! initialized true)
+  (when @on-init* (@on-init*)))
 
 (defn enable-re-frisk-remote! [& [{:keys [host pre-send on-init] :as opts}]]
   (timbre/merge-config! {:ns-blacklist ["taoensso.sente" "taoensso.sente.*"]})
