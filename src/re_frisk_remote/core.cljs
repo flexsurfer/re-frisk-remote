@@ -9,6 +9,7 @@
             [cognitect.transit :as transit])
   (:require-macros [reagent.ratom :refer [reaction]]))
 
+(defonce initialized false)
 (defonce app-db-prev-event (atom {}))
 (defonce chsk-send!* (atom {}))
 (defonce on-init* (atom nil))
@@ -17,10 +18,11 @@
 (defonce evnt-time* (atom nil))
 
 (defn- app-db-diff []
-  (let [app-db @(subscribe [::db])
-        app-diff (diff/diff @app-db-prev-event app-db)]
-    (reset! app-db-prev-event app-db)
-    app-diff))
+  (if initialized
+   (let [app-db @(subscribe [::db])
+         app-diff (diff/diff @app-db-prev-event app-db)]
+     (reset! app-db-prev-event app-db)
+     app-diff)))
 
 (defn pre-event-callback [value]
   (reset! evnt-time* (js/Date.now))
@@ -69,7 +71,8 @@
     (re-frame.core/register-sub ::db (fn [db _] (reaction @db))))
   (reagent/track! send-app-db)
   (re-frame/add-post-event-callback post-event-callback)
-  (when @on-init* (@on-init*)))
+  (when @on-init* (@on-init*))
+  (set! initialized true))
 
 (defn enable-re-frisk-remote! [& [{:keys [host pre-send on-init] :as opts}]]
   (timbre/merge-config! {:ns-blacklist ["taoensso.sente" "taoensso.sente.*"]})
