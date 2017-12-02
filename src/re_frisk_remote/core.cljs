@@ -18,7 +18,7 @@
 (defonce evnt-time* (atom nil))
 
 (defn- app-db-diff []
-  (if initialized
+  (when initialized
    (let [app-db @(subscribe [::db])
          app-diff (diff/diff @app-db-prev-event app-db)]
      (reset! app-db-prev-event app-db)
