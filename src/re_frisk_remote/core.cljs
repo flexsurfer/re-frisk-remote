@@ -29,10 +29,11 @@
   (@chsk-send!* [:refrisk/pre-events value]))
 
 (defn post-event-callback [value]
-  (@chsk-send!* [:refrisk/events (conj {:app-db-diff (app-db-diff)}
-                                       (if @evnt-time*
-                                         {:time (- (js/Date.now) @evnt-time*)}
-                                         {:event value}))]))
+  (let [event-data (if @evnt-time*
+                     {:time (- (js/Date.now) @evnt-time*)}
+                     {:event value})]
+    (@chsk-send!* [:refrisk/events (conj {:app-db-diff (app-db-diff)}
+                                         event-data)])))
 
 (defn re-frame-sub [& rest]
   ;; TODO send diff
