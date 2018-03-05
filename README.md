@@ -25,6 +25,9 @@ Or select a different host and port by supplying the host and port number:
 (enable-re-frisk-remote! {:host "192.168.1.1:8095"})
 ```
 
+You could also provide options `:enable-re-frisk? false` or `:enable-re-frame-10x? true` to enable/disable sending traces for respective component while re-frame-10x is disabled by default.
+
+
 Run re-frisk remote server using leiningen re-frisk [plugin](https://github.com/flexsurfer/lein-re-frisk)
 
 `$ lein re-frisk`
