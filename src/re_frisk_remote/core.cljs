@@ -2,9 +2,11 @@
   (:require [taoensso.sente :as sente]
             [reagent.core :as reagent]
             [re-frame.subs :refer [query->reaction]]
+            [re-frame.trace :as trace :include-macros true]
             [re-frame.core :refer [subscribe] :as re-frame]
             [re-frisk.diff :as diff]
             [re-frisk.delta :as delta]
+            [day8.re-frame-10x :as rft]
             [taoensso.sente.packers.transit :as sente-transit]
             [cognitect.transit :as transit]
             [taoensso.timbre :as timbre])
@@ -18,6 +20,10 @@
 (defonce send-state (atom nil))
 
 (defonce ch-chsk (atom {}))
+
+(defonce re-frisk-enabled? true)
+(defonce re-frame-10x-enabled? false)
+
 (defonce chsk-send!* (atom {}))
 (defonce on-init* (atom nil))
 (defonce pre-send* (atom nil))
@@ -28,7 +34,7 @@
     (@chsk-send!* message)))
 
 (defn pre-event-callback [value]
-  (when @send-state
+  (when (and @send-state re-frisk-enabled?)
     (swap! send-state assoc :event-time (js/Date.now))
     (send [:refrisk/pre-events value])))
 
@@ -44,6 +50,9 @@
                         event-data)]
       (swap! send-state assoc :prev-event-app-db app-db :event-time nil)
       (send [:refrisk/events payload]))))
+
+(defn register-trace-cb []
+  (trace/register-trace-cb ::cb (fn [traces] (@chsk-send!* [:trace/log traces]))))
 
 (defn id-handlers []
   (into {} (map #(hash-map (first %) @(second %))
@@ -133,15 +142,21 @@
 
 (defn init []
   (start-router!)
-  (if re-frame.core/reg-sub
-    (re-frame.core/reg-sub ::db (fn [db _] db))
-    (re-frame.core/register-sub ::db (fn [db _] (reaction @db))))
-  (re-frame/add-post-event-callback post-event-callback)
+  (when re-frisk-enabled?
+    (if re-frame.core/reg-sub
+      (re-frame.core/reg-sub ::db (fn [db _] db))
+      (re-frame.core/register-sub ::db (fn [db _] (reaction @db))))
+    (re-frame/add-post-event-callback post-event-callback))
+  (when re-frame-10x-enabled?
+    (register-trace-cb))
   (when @on-init* (@on-init*)))
 
-(defn enable-re-frisk-remote! [& [{:keys [host pre-send on-init] :as opts}]]
+(defn enable-re-frisk-remote! [& [{:keys [host pre-send on-init enable-re-frisk? enable-re-frame-10x?]
+                                   :or {enable-re-frisk? true enable-re-frame-10x? false}}]]
   (timbre/merge-config! {:ns-blacklist ["taoensso.sente" "taoensso.sente.*"]})
   (reset! pre-send* pre-send)
   (reset! on-init* on-init)
+  (set! re-frisk-enabled? enable-re-frisk?)
+  (set! re-frame-10x-enabled? enable-re-frame-10x?)
   (start-socket (or host "localhost:4567"))
   (init))
