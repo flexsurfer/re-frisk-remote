@@ -6,7 +6,8 @@
             [re-frisk.diff :as diff]
             [re-frisk.delta :as delta]
             [taoensso.sente.packers.transit :as sente-transit]
-            [cognitect.transit :as transit])
+            [cognitect.transit :as transit]
+            [taoensso.timbre :as timbre])
   (:require-macros [reagent.ratom :refer [reaction]]))
 
 ;; either nil (do not send), or a map with the following optional keys:
