@@ -1,4 +1,4 @@
-(defproject re-frisk-remote "0.5.3"
+(defproject re-frisk-remote "0.5.4"
   :description "re-frisk remote library for use with leiningen re-frisk plugin"
   :url "https://github.com/flexsurfer/re-frisk"
   :license {:name "MIT License"
@@ -9,4 +9,4 @@
                  [com.taoensso/timbre "4.7.4"]
                  [com.taoensso/sente "1.11.0"]
                  [com.cognitect/transit-cljs "0.8.239"]
-                 [re-frisk "0.5.3"]])
+                 [re-frisk "0.5.4"]])
