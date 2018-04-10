@@ -6,7 +6,6 @@
             [re-frame.core :refer [subscribe] :as re-frame]
             [re-frisk.diff :as diff]
             [re-frisk.delta :as delta]
-            [day8.re-frame-10x :as rft]
             [taoensso.sente.packers.transit :as sente-transit]
             [cognitect.transit :as transit]
             [taoensso.timbre :as timbre])
