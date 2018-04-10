@@ -9,5 +9,4 @@
                  [com.taoensso/timbre "4.7.4"]
                  [com.taoensso/sente "1.11.0"]
                  [com.cognitect/transit-cljs "0.8.239"]
-                 [status-im/re-frame-10x "0.3.0-RN"]
                  [re-frisk "0.5.4"]])
