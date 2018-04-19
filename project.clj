@@ -1,4 +1,4 @@
-(defproject re-frisk-remote "0.5.4"
+(defproject re-frisk-remote "0.5.5"
   :description "re-frisk remote library for use with leiningen re-frisk plugin"
   :url "https://github.com/flexsurfer/re-frisk"
   :license {:name "MIT License"
