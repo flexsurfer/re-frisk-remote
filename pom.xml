@@ -3,7 +3,7 @@
   <groupId>re-frisk-remote</groupId>
   <artifactId>re-frisk-remote</artifactId>
   <packaging>jar</packaging>
-  <version>0.5.0</version>
+  <version>0.5.5.11</version>
   <name>re-frisk-remote</name>
   <description>re-frisk remote library for use with leiningen re-frisk plugin</description>
   <url>https://github.com/flexsurfer/re-frisk</url>
@@ -16,7 +16,7 @@
   <scm>
     <connection>scm:git:git://github.com/flexsurfer/re-frisk-remote.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/flexsurfer/re-frisk-remote.git</developerConnection>
-    <tag>88ab931ed0c8d1ae6c5b92d2968f3b0bf77c8809
+    <tag>c09744818117b54c9ba6657d5cecd063767620d5
 </tag>
     <url>https://github.com/flexsurfer/re-frisk-remote</url>
   </scm>
@@ -79,14 +79,19 @@
       <version>4.7.4</version>
     </dependency>
     <dependency>
-      <groupId>com.taoensso</groupId>
+      <groupId>re-frisk</groupId>
       <artifactId>sente</artifactId>
-      <version>1.11.0</version>
+      <version>1.15.0</version>
     </dependency>
     <dependency>
       <groupId>com.cognitect</groupId>
       <artifactId>transit-cljs</artifactId>
       <version>0.8.239</version>
+    </dependency>
+    <dependency>
+      <groupId>re-frisk</groupId>
+      <artifactId>re-frisk</artifactId>
+      <version>0.5.4</version>
     </dependency>
   </dependencies>
 </project>

@@ -97,6 +97,7 @@
   (let [{:keys [send-fn ch-recv]}
         (sente/make-channel-socket-client!
           "/chsk"
+          nil
           {:type     :auto
            :host     host
            :protocol :http

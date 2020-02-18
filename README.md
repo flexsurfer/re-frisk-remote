@@ -9,7 +9,9 @@
 [![Clojars](https://img.shields.io/clojars/v/re-frisk-remote.svg)](https://clojars.org/re-frisk-remote)
 
 
-Add `[re-frisk-remote "0.5.5"]` to the dev `:dependencies` in your project.clj
+NOTE! for shadow-cljs RN projects you can use this libary: https://github.com/flexsurfer/re-frisk-rn
+
+Add `[re-frisk-remote "0.5.10"]` to the dev `:dependencies` in your project.clj
                                 
 run re-frisk using `enable-re-frisk-remote!` function on the localhost and default port (4567)
 
