@@ -1,3 +1,6 @@
+# THIS REPO ISN'T MAINTANIED ANYMORE you can find re-frisk-remote here https://github.com/flexsurfer/re-frisk
+
+
 # re-frisk remote library
 
 [re-frisk](https://github.com/flexsurfer/re-frisk) remote library for debugging re-frame applications (react native, electron, web) using leiningen re-frisk [plugin](https://github.com/flexsurfer/lein-re-frisk)
